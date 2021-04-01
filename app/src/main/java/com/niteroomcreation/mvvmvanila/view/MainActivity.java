@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     void setupViewModel() {
         mainVM = new ViewModelProvider(this).get(MainVM.class);
+        mainVM.init();
         mainVM.getPlaces().observe(this, new Observer<List<Places>>() {
             @Override
             public void onChanged(List<Places> places) {

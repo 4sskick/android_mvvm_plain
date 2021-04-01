@@ -3,6 +3,7 @@ package com.niteroomcreation.mvvmvanila.model.repository;
 import androidx.lifecycle.MutableLiveData;
 
 import com.niteroomcreation.mvvmvanila.model.Places;
+import com.niteroomcreation.mvvmvanila.util.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,19 @@ public class PlaceRepository {
         return mInstance;
     }
 
-//    public MutableLiveData<List<Places>> getDataset() {
-//        fakeDataset();
-//    }
-//
-//    //fake data
-//    void fakeDataset(){
-//        dataset.set(new Places())
-//    }
+    public MutableLiveData<List<Places>> getDataset() {
+        //this should be data from webservice
+        fakeDataset();
+
+        MutableLiveData<List<Places>> data = new MutableLiveData<>();
+        data.setValue(dataset);
+        return data;
+    }
+
+    //fake data
+    void fakeDataset() {
+        for (int i = 0; i < 35; i++) {
+            dataset.add(new Places(CommonUtil.constructRandomAlphabet(10)));
+        }
+    }
 }

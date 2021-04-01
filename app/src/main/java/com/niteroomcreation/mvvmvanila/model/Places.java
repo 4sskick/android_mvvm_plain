@@ -9,8 +9,8 @@ public class Places {
     private String imgUrl;
     private String name;
 
-    public Places(String imgUrl, String name) {
-        this.imgUrl = imgUrl;
+    public Places( String name) {
+        this.imgUrl = "";
         this.name = name;
     }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.niteroomcreation.mvvmvanila.model.Places;
+import com.niteroomcreation.mvvmvanila.model.repository.PlaceRepository;
 
 import java.util.List;
 
@@ -17,9 +18,17 @@ public class MainVM extends ViewModel {
     public static final String TAG = MainVM.class.getSimpleName();
 
     private MutableLiveData<List<Places>> mPlace;
+    private PlaceRepository repository;
 
     public void init() {
 
+        //if it not null then it already retrieve data
+        if (mPlace != null)
+            return;
+
+        //else gonna retrieve data from repo
+        repository = PlaceRepository.getInstance();
+        mPlace = repository.getDataset();
     }
 
     public LiveData<List<Places>> getPlaces() {
