@@ -13,6 +13,7 @@ import com.niteroomcreation.mvvmvanila.R;
 import com.niteroomcreation.mvvmvanila.model.Places;
 import com.niteroomcreation.mvvmvanila.view.adapter.MainAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab_main);
         rv = findViewById(R.id.rv_main);
         progressBar = findViewById(R.id.progress_main);
+
+        data = new ArrayList<>();
 
         setupUI();
     }
