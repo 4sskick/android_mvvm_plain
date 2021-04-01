@@ -1,6 +1,8 @@
 package com.niteroomcreation.mvvmvanila.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.niteroomcreation.mvvmvanila.R;
 import com.niteroomcreation.mvvmvanila.model.Places;
 import com.niteroomcreation.mvvmvanila.view.adapter.MainAdapter;
+import com.niteroomcreation.mvvmvanila.viewmodel.MainVM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private MainAdapter adapter;
-
-    private List<Places> data;
+    private MainVM mainVM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +39,22 @@ public class MainActivity extends AppCompatActivity {
         rv = findViewById(R.id.rv_main);
         progressBar = findViewById(R.id.progress_main);
 
-        data = new ArrayList<>();
-
+        setupViewModel();
         setupUI();
     }
 
+    void setupViewModel() {
+        mainVM = new ViewModelProvider(this).get(MainVM.class);
+        mainVM.getPlaces().observe(this, new Observer<List<Places>>() {
+            @Override
+            public void onChanged(List<Places> places) {
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
     void setupUI() {
-        adapter = new MainAdapter(this, data);
+        adapter = new MainAdapter(this, mainVM.getPlaces().getValue());
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
     }
