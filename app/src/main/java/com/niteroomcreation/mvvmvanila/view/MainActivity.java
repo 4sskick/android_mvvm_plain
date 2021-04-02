@@ -52,12 +52,33 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+        mainVM.getIsUpdating().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isUpdating) {
+                if (isUpdating)
+                    showLoading();
+                else {
+                    hideLoading();
+                    //scrolling it to latest values which added
+                    rv.smoothScrollToPosition(mainVM.getPlaces().getValue().size() - 1);
+                }
+            }
+        });
     }
 
     void setupUI() {
         adapter = new MainAdapter(this, mainVM.getPlaces().getValue());
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainVM.addPlace(
+                        new Places("a random fake place")
+                );
+            }
+        });
     }
 
     void showLoading() {
