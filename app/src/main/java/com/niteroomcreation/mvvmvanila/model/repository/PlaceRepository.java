@@ -34,8 +34,6 @@ public class PlaceRepository {
 
     //fake data
     void fakeDataset() {
-        for (int i = 0; i < 35; i++) {
-            dataset.add(new Places(CommonUtil.constructRandomAlphabet(10)));
-        }
+        dataset.addAll(Places.constructPlaces(35, null));
     }
 }

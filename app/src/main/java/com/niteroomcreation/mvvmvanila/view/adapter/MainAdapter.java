@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.niteroomcreation.mvvmvanila.R;
 import com.niteroomcreation.mvvmvanila.model.Places;
 
@@ -63,6 +64,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
 
         void binds() {
+            Glide.with(img.getContext())
+                    .load(getItem(getAdapterPosition()).getImgUrl())
+                    .circleCrop()
+                    .into(img);
             txt.setText(getItem(getAdapterPosition()).getName());
         }
     }

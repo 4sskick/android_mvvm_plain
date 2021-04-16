@@ -1,22 +1,21 @@
 package com.niteroomcreation.mvvmvanila.view;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.niteroomcreation.mvvmvanila.R;
 import com.niteroomcreation.mvvmvanila.model.Places;
 import com.niteroomcreation.mvvmvanila.view.adapter.MainAdapter;
-import com.niteroomcreation.mvvmvanila.viewmodel.MainVM;
+import com.niteroomcreation.mvvmvanila.viewmodel.MainViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private MainAdapter adapter;
-    private MainVM mainVM;
+    private MainViewModel mainVM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +38,12 @@ public class MainActivity extends AppCompatActivity {
         rv = findViewById(R.id.rv_main);
         progressBar = findViewById(R.id.progress_main);
 
-        setupViewModel();
+        subscribeObserver();
         setupUI();
     }
 
-    void setupViewModel() {
-        mainVM = new ViewModelProvider(this).get(MainVM.class);
-        mainVM.init();
+    void subscribeObserver() {
+        mainVM = new ViewModelProvider(this).get(MainViewModel.class);
         mainVM.getPlaces().observe(this, new Observer<List<Places>>() {
             @Override
             public void onChanged(List<Places> places) {
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mainVM.addPlace(
-                        new Places("a random fake place")
+                        new Places("a random fake place", Places.constructRandomPickUrlImage())
                 );
             }
         });

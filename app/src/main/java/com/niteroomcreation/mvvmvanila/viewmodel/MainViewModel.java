@@ -18,16 +18,16 @@ import java.util.concurrent.Executors;
  * Created by Septian Adi Wijaya on 01/04/2021.
  * please be sure to add credential if you use people's code
  */
-public class MainVM extends ViewModel {
+public class MainViewModel extends ViewModel {
 
-    public static final String TAG = MainVM.class.getSimpleName();
+    public static final String TAG = MainViewModel.class.getSimpleName();
 
     private MutableLiveData<List<Places>> mPlace;
     private MutableLiveData<Boolean> isUpdating;
     private PlaceRepository repository;
 
-    public void init() {
 
+    public MainViewModel() {
         //if it not null then it already retrieve data
         if (mPlace != null)
             return;
