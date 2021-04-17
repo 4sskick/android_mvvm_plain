@@ -15,21 +15,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class NetConfig {
 
-    private static OkHttpClient httpClient = new OkHttpClient.Builder()
+    private static final OkHttpClient httpClient = new OkHttpClient.Builder()
             .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .retryOnConnectionFailure(true)
             .connectTimeout(15, TimeUnit.SECONDS)
             .build();
 
-    private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+    private static final Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
             .baseUrl(CommonConstant.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient);
 
-    private static Retrofit retrofit = retrofitBuilder.build();
-    private static NetAPI api = retrofit.create(NetAPI.class);
+    private static final Retrofit retrofit = retrofitBuilder.build();
+    private static final NetApi api = retrofit.create(NetApi.class);
 
-    public static NetAPI getApi() {
+    public static NetApi getApi() {
         return api;
     }
 }

@@ -10,7 +10,7 @@ import retrofit2.http.Query;
  * Created by Septian Adi Wijaya on 17/04/2021.
  * please be sure to add credential if you use people's code
  */
-interface NetAPI {
+interface NetApi {
 
 
     // GET RECIPE REQUEST
