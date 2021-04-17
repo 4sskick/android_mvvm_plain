@@ -1,4 +1,4 @@
-package com.niteroomcreation.mvvmvanila.view;
+package com.niteroomcreation.mvvmvanila.view.presenter.act;
 
 import android.os.Bundle;
 import android.view.View;
